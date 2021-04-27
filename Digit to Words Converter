@@ -1,0 +1,111 @@
+#Name: Matteo Balestriere
+#Email:MATTEO.BALESTRIERE54@myhunter.cuny.edu
+#Date: 27 April 2021
+#Program Description: Takes a digit input from a user from 1 to 9999, then converts it into words
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## dN = digit number
+## FP = Final Phrase
+## W = Word
+## V = Value
+## V1 = Value 1
+## NV = Number Value
+## Ns = Num string form
+## NLO = Numbers List Ones
+## NLT = Number List Tens
+## NLTs = Number List Teens
+## LTN = Last Two Numbers
+## ON = Other Numbers
+## ONlen = 'Other Numbers' lenght
+
+def teens(num):
+    NLTs = ['Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen']
+    Ns = str(num)
+    LTN = int(Ns[-2] + Ns[-1])
+    V1 = LTN - 11
+    FP = NLTs[V1]
+    if len(Ns) > 2:
+        NLO = ['One','Two','Three','Four','Five','Six','Seven','Eight','Nine']
+
+        V = -1
+        ch = 0
+        ON = ''
+        ONlen = -len(Ns) - 1
+        for i in range(-3,ONlen,-1):
+            ON += Ns[i]
+        for c in ON:
+            ch += 1
+            NV = int(ON[V]) - 1
+            V = V - 1
+            if ch == 1:
+               if not NV == -1:
+                   W = NLO[NV] + " Hundred"
+                   FP = W + " " + FP
+            elif ch == 2:
+                if not NV == -1:
+                    W = NLO[NV] + " Thousand"
+                    FP = W + " " + FP
+                    
+    return FP
+##
+##
+##
+def notTeens(num):
+    NLO = ['One','Two','Three','Four','Five','Six','Seven','Eight','Nine']
+    NLT = ['Ten','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety']
+    
+    Ns = str(num)
+    V = -1
+    ch = 0
+    for c in Ns:
+        ch += 1
+        NV = int(Ns[V]) - 1
+        V = V - 1
+        if ch == 1:
+            if not NV == -1:
+                W = NLO[NV]
+                FP = W
+            else:
+                FP = ''
+        elif ch == 2:
+            if not NV == -1:
+                W = NLT[NV]
+                FP = W + " " + FP
+        elif ch == 3:
+            if not NV == -1:
+                W = NLO[NV] + " Hundred"
+                FP = W + " " + FP
+        elif ch == 4:
+            if not NV == -1:
+                W = NLO[NV] + " Thousand"
+                FP = W + " " + FP
+                
+    return FP
+##
+##
+##
+def main(num):
+    Ns = str(num)
+    LTN = int(Ns[-2] + Ns[-1])
+    if num == 0:
+        FW = "Zero"
+    elif LTN > 10 and LTN < 20:
+        FP = teens(num)
+    else:
+       FP = notTeens(num)
+    return FP
+##
+##
+##
+
+dN = ''
+while not dN.isdigit():
+    dN = (input('Put in a whole number digit between 1 and 9999:'))
+    if not dN.isdigit():
+        dN = ''
+    elif not (int(dN) >= 0 and int(dN) <= 9999):
+        dN = ''
+    
+number = (main(int(dN)))
+
+print(number)
