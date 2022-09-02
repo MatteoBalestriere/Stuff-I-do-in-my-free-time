@@ -37,13 +37,13 @@ def teens(num):
             ch += 1
             NV = int(ON[V]) - 1
             V = V - 1
-            if ch == 1:
+            if ch == 2:
                if not NV == -1:
-                   W = NLO[NV] + " Hundred"
+                   W = NLO[NV] + " Thousand"
                    FP = W + " " + FP
-            elif ch == 2:
+            elif ch == 1:
                 if not NV == -1:
-                    W = NLO[NV] + " Thousand"
+                    W = NLO[NV] + " Hundred"
                     FP = W + " " + FP
                     
     return FP
